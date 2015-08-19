@@ -8,6 +8,20 @@
 //#include <opencv2/opencv.hpp>
 #include <stdio.h>
 #include <stdbool.h>
+#include <time.h>
+
+void delayDefineByMyself(float time_want_to_wait)
+{
+	clock_t bef=0, aft=0;
+	bef=clock();
+	aft=clock()-bef;
+	float diff=((int)aft)/CLOCKS_PER_SEC;
+	while(diff<time_want_to_wait)
+	{
+		aft=clock()-bef;
+		diff=((float)aft)/CLOCKS_PER_SEC;
+	}
+}
 
 int main()
 {
@@ -37,6 +51,7 @@ int main()
         printf("%d\n",i);
 
         if(cvWaitKey(20)>0)     break;
+		delayDefineByMyself(0.1);
         i++;
     }
 
